@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.scss';
+import { GetRandomCommander } from './api/scryfall';
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      Hello world
+    <div>
+      <GetRandomCommander />
     </div>
   );
 }
