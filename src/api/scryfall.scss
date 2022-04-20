@@ -10,7 +10,7 @@
     width: 4rem;
     border-radius: 50%;
     &:checked {
-        box-shadow: 2px 2px 4px rgb(81, 81, 81) inset;
+        border: 2px solid rgb(46, 46, 46) ;
     }
     &:hover {
         cursor: pointer;

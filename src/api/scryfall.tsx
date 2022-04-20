@@ -5,17 +5,37 @@ import '../components/btn.scss';
 
 const baseURL = 'https://api.scryfall.com/cards/random';
 const parameters = '?q=%28type%3Acreature+type%3Alegendary%29';
+
 interface CardProperties {
   name: string | undefined;
   image_uris: {
     normal: string | undefined;
   }
+  related_uris: {
+    edhrec: string | undefined;
+  }
+}
+
+function ColorsLabel({ id = 'default', value = 'default' }):any {
+  return (
+    <label htmlFor="color">
+      <input
+        id={id}
+        type="checkbox"
+        name="colors"
+        value={value}
+      />
+    </label>
+  );
 }
 
 const defaultCard:CardProperties = {
   name: undefined,
   image_uris: {
     normal: undefined,
+  },
+  related_uris: {
+    edhrec: undefined,
   },
 };
 
@@ -27,14 +47,6 @@ export function GetRandomCommander(): any {
   const [loading, setLoading]:
       [boolean, (loading: boolean) => void] = useState<boolean>(false);
   const [error, setError]: [string, (error: string) => void] = useState('');
-  const cancelToken = axios.CancelToken;
-  const [cancelTokenSource, setCancelTokenSource]:
-    [
-      CancelTokenSource,
-      (cancelTokenSource: CancelTokenSource) => void
-    ] = useState(cancelToken.source);
-
-  // useEffect(() => {}, [response]);
 
   const handleGetCardClick = ():any => {
     let url = baseURL + parameters;
@@ -58,7 +70,6 @@ export function GetRandomCommander(): any {
         url,
         {
           timeout: 2000,
-          cancelToken: cancelTokenSource.token,
         },
       )
       .then((response) => {
@@ -79,47 +90,11 @@ export function GetRandomCommander(): any {
       <form method="GET">
         <fieldset id="colorSelection" className="colorSelection">
           <legend>Select colors</legend>
-          <label htmlFor="color">
-            <input
-              id="checkbox-white"
-              type="checkbox"
-              name="colors"
-              value="w"
-            />
-          </label>
-          <label htmlFor="color">
-            <input
-              id="checkbox-blue"
-              type="checkbox"
-              name="colors"
-              value="u"
-            />
-          </label>
-          <label htmlFor="color">
-            <input
-              id="checkbox-black"
-              type="checkbox"
-              name="colors"
-              value="b"
-            />
-          </label>
-          <label htmlFor="color">
-            <input
-              id="checkbox-red"
-              type="checkbox"
-              name="colors"
-              value="r"
-            />
-          </label>
-          <label htmlFor="color">
-            <input
-              id="checkbox-green"
-              type="checkbox"
-              name="colors"
-              value="g"
-            />
-          </label>
-
+          <ColorsLabel id="checkbox-white" value="w" />
+          <ColorsLabel id="checkbox-blue" value="u" />
+          <ColorsLabel id="checkbox-black" value="b" />
+          <ColorsLabel id="checkbox-red" value="r" />
+          <ColorsLabel id="checkbox-green" value="g" />
         </fieldset>
         {loading && (
         <div>
@@ -136,8 +111,15 @@ export function GetRandomCommander(): any {
           </button>
         )}
       </form>
-
-      <p>{card.name}</p>
+      <p>
+        <a
+          href={card.related_uris.edhrec}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {card.name}
+        </a>
+      </p>
       <img src={card.image_uris.normal} alt={card.name} />
       {error && <p>{error}</p>}
 
