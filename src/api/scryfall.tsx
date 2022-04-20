@@ -1,5 +1,7 @@
 import axios, { CancelTokenSource } from 'axios';
 import React, { useState } from 'react';
+import './scryfall.scss';
+import '../components/btn.scss';
 
 const baseURL = 'https://api.scryfall.com/cards/random';
 const parameters = '?q=%28type%3Acreature+type%3Alegendary%29';
@@ -34,12 +36,6 @@ export function GetRandomCommander(): any {
 
   // useEffect(() => {}, [response]);
 
-  const handleCancelClick = (): void => {
-    if (cancelTokenSource) {
-      cancelTokenSource.cancel('User cancelled the operation');
-    }
-  };
-
   const handleGetCardClick = ():any => {
     let url = baseURL + parameters;
     const colors = (
@@ -61,7 +57,7 @@ export function GetRandomCommander(): any {
       .get<CardProperties>(
         url,
         {
-          timeout: 10000,
+          timeout: 2000,
           cancelToken: cancelTokenSource.token,
         },
       )
@@ -69,8 +65,9 @@ export function GetRandomCommander(): any {
         setCard(response.data);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         const errorResponse = 'An unexpected error has occurred';
+        console.log(err);
         setError(errorResponse);
         setLoading(false);
       });
@@ -78,42 +75,72 @@ export function GetRandomCommander(): any {
 
   return (
     <>
-      {loading && (
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
-      )}
+
       <form method="GET">
-        <fieldset id="colorSelection">
+        <fieldset id="colorSelection" className="colorSelection">
           <legend>Select colors</legend>
           <label htmlFor="color">
-            <input type="checkbox" name="colors" value="w" />
-            White
+            <input
+              id="checkbox-white"
+              type="checkbox"
+              name="colors"
+              value="w"
+            />
           </label>
           <label htmlFor="color">
-            <input type="checkbox" name="colors" value="u" />
-            Blue
+            <input
+              id="checkbox-blue"
+              type="checkbox"
+              name="colors"
+              value="u"
+            />
           </label>
           <label htmlFor="color">
-            <input type="checkbox" name="colors" value="b" />
-            Black
+            <input
+              id="checkbox-black"
+              type="checkbox"
+              name="colors"
+              value="b"
+            />
           </label>
           <label htmlFor="color">
-            <input type="checkbox" name="colors" value="r" />
-            Red
+            <input
+              id="checkbox-red"
+              type="checkbox"
+              name="colors"
+              value="r"
+            />
           </label>
           <label htmlFor="color">
-            <input type="checkbox" name="colors" value="g" />
-            Green
+            <input
+              id="checkbox-green"
+              type="checkbox"
+              name="colors"
+              value="g"
+            />
           </label>
-        </fieldset>
 
-        <button type="button" onClick={handleGetCardClick}>
-          Random Commander
-        </button>
+        </fieldset>
+        {loading && (
+        <div>
+          Getting commander...
+        </div>
+        )}
+        {!loading && (
+          <button
+            className="btn btn--default"
+            type="button"
+            onClick={handleGetCardClick}
+          >
+            Random Commander
+          </button>
+        )}
       </form>
 
       <p>{card.name}</p>
       <img src={card.image_uris.normal} alt={card.name} />
       {error && <p>{error}</p>}
+
     </>
   );
 }

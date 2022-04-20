@@ -1,0 +1,49 @@
+.colorSelection {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    border: none;
+    
+    & input[type='checkbox']{
+    appearance: none;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    &:checked {
+        box-shadow: 2px 2px 4px rgb(81, 81, 81) inset;
+    }
+    &:hover {
+        cursor: pointer;
+        filter: brightness(1.05);
+        box-shadow: 1px 1px 4px rgb(81, 81, 81);
+        }
+    }
+}
+
+#checkbox {
+    &-white {
+        background: url(../assets/white_mtg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    &-blue {
+        background: url(../assets/blue_mtg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    &-black {
+        background: url(../assets/black_mtg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    &-green {
+        background: url(../assets/green_mtg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    &-red {
+        background: url(../assets/red_mtg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
