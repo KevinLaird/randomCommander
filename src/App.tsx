@@ -1,13 +1,10 @@
 import React from 'react';
-import './App.scss';
-import { GetRandomCommander } from './api/scryfall';
+import RandomCommanderCard from './components/RandomCommander/RandomCommanderCard';
 
-function App(): JSX.Element {
-  return (
-    <div>
-      <GetRandomCommander />
-    </div>
-  );
-}
+const App = (): JSX.Element => (
+  <div>
+    <RandomCommanderCard />
+  </div>
+);
 
 export default App;
