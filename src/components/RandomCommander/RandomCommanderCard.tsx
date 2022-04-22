@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './RandomCommanderCard.scss';
+import '../../assets/styles/btn.scss';
 import ColorLabel from './ColorLabel';
 import GetRandomCommander, {
   CardProperties,

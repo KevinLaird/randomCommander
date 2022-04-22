@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import '../components/btn.scss';
 
 export interface CardProperties {
   name: string | undefined;
@@ -28,13 +27,12 @@ const GetRandomCommander = async (
   const baseURL = 'https://api.scryfall.com/cards/random';
   const parameters = '?q=%28type%3Acreature+type%3Alegendary%29';
   const url = baseURL + parameters + [...colorTypes].join('');
-  console.log(url);
   let res = defaultCard;
   await axios.get(url, { timeout: 2000 })
     .then((response) => {
       res = response.data;
     })
-    .catch((err) => err);
+    .catch((err) => console.log(err));
   return res;
 };
 
