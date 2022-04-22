@@ -1,4 +1,5 @@
 import React from 'react';
+import './ColorLabel.scss';
 
 const ColorLabel = ({
   id = 'Default',

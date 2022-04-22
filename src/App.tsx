@@ -1,4 +1,5 @@
 import React from 'react';
+import './assets/styles/Main.scss';
 import RandomCommanderCard from './components/RandomCommander/RandomCommanderCard';
 
 const App = (): JSX.Element => (
