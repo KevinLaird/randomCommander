@@ -24,9 +24,8 @@ const CommanderForm: React.FC<ChildProps> = ({ setCard }):JSX.Element => {
     const path = '/cards/random';
     const query = `?q=%28type%3Acreature+type%3Alegendary%29
       ${[...colorTypes].join('')}`;
-    const GetData = await GetScryfallData(path, query)
-      .then((result) => result);
-    setCard(GetData);
+    const cardData = await GetScryfallData(path, query);
+    setCard(cardData);
   };
   return (
     <div>

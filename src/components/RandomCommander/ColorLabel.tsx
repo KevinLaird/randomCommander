@@ -6,14 +6,12 @@ const ColorLabel = ({
   inputName = 'colors',
   value = 'Default',
 }): JSX.Element => (
-  <label htmlFor="color">
-    <input
-      id={id}
-      type="checkbox"
-      name={inputName}
-      value={value}
-    />
-  </label>
+  <input
+    id={id}
+    type="checkbox"
+    name={inputName}
+    value={value}
+  />
 );
 
 export default ColorLabel;

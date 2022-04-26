@@ -3,8 +3,7 @@ import CommanderForm from './CommanderForm';
 import { CardProperties } from '../../api/Scryfall';
 
 const RandomCommanderCard = ():JSX.Element => {
-  const [card, setCard]:
-  [CardProperties | undefined, (card: CardProperties) => void] = useState();
+  const [card, setCard] = useState<CardProperties | undefined>();
   return (
     <>
       <CommanderForm setCard={setCard} />
